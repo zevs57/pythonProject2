@@ -7,7 +7,6 @@ FPS = 30
 screen = pygame.display.set_mode((400, 400))
 
 
-# Здесь мы будем рисовать
 def draw_hare(surface, x, y, width, height, color):
     """
     Функция рисует зайца на экране.
