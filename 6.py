@@ -124,7 +124,8 @@ while not finished:
                 points = points + 2
             if click2(event):  # Посчет очков за попадание в квадрат
                 points = points + 1
-
+    if points > 100:
+        FPS = points // 30
     text("Очки " + str(points))
     pygame.display.update()
     screen.fill(BLACK)
