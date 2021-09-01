@@ -42,6 +42,7 @@ def click1(event):
     :return: Возвращает True, если было попадание в шарик
     """
     if (event.pos[1] - y1) ** 2 + (event.pos[0] - x1) ** 2 <= r1 ** 2:
+        sound2.play()
         return True
 
 
@@ -52,6 +53,7 @@ def click2(event):
     :return: Возвращает True, если было попадание в квадрат
     """
     if (event.pos[1] - y2) ** 2 + (event.pos[0] - x2) ** 2 <= r2 ** 2:
+        sound1.play()
         return True
 
 
@@ -71,6 +73,13 @@ def text(str):
     pygame.draw.rect(screen, (0, 255, 0), (text_x - 10, text_y - 10,
                                            text_w + 20, text_h + 20), 1)
 
+
+# Музыка и звуки
+pygame.mixer.music.load('data/house_lo.ogg')
+pygame.mixer.music.play(-1)
+
+sound1 = pygame.mixer.Sound('data/boom.wav')
+sound2 = pygame.mixer.Sound('punch.wav')
 
 pygame.display.update()
 clock = pygame.time.Clock()
@@ -120,6 +129,7 @@ while not finished:
     pygame.display.update()
     screen.fill(BLACK)
 
+
 pygame.quit()
 
 fin = open('table.txt', 'r', encoding='utf8')
@@ -134,7 +144,7 @@ for line in fin:
 if points > max:
     fout = open("table.txt", "a", encoding='utf8')
     name = input("Вы стали лучшим игроком!!! Ваше имя?  ")
-    print(name + " набрал " + str(points) + " ", file=fout)
+    print(name + " набрал(а) " + str(points) + " ", file=fout)
     fout.close()
 
 fin.close()
