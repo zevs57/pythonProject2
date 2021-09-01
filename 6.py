@@ -35,7 +35,7 @@ def new_ball2():
     color2 = COLORS[randint(0, 5)]
 
 
-def click(event):
+def click1(event):
     """
     По клику мыши вычисляется (по теореме Пифагора) попали ли мы в шарик
     :param event:
@@ -43,6 +43,14 @@ def click(event):
     """
     if (event.pos[1] - y1) ** 2 + (event.pos[0] - x1) ** 2 <= r1 ** 2:
         return True
+
+
+def click2(event):
+    """
+    По клику мыши вычисляется (по теореме Пифагора) попали ли мы в квадрат
+    :param event:
+    :return: Возвращает True, если было попадание в квадрат
+    """
     if (event.pos[1] - y2) ** 2 + (event.pos[0] - x2) ** 2 <= r2 ** 2:
         return True
 
@@ -103,8 +111,11 @@ while not finished:
         if event.type == pygame.QUIT:
             finished = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if click(event):  # Посчет очков
+            if click1(event):  # Посчет очков за попадание в шарик
+                points = points + 2
+            if click2(event):  # Посчет очков за попадание в квадрат
                 points = points + 1
+
     text("Очки " + str(points))
     pygame.display.update()
     screen.fill(BLACK)
