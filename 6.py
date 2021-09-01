@@ -66,22 +66,20 @@ while not finished:
     x1 += rect_change_x1
     y1 += rect_change_y1
     circle(screen, color1, (x1, y1), r1)
-    if y1 > 900 - r1 or y1 < 0 + r1:  # Смена направления после удара о границу
-        rect_change_y1 += randint(10, 50)
+    if y1 > 900 - 2 * r1 or y1 < 0 + 2 * r1:  # Смена направления после удара о границу
         rect_change_y1 = rect_change_y1 * -1
-    if x1 > 1200 - r1 or x1 < 0 + r1:  # Смена направления после удара о границу
-        rect_change_x1 += randint(10, 50)
+
+    if x1 > 1200 - 2 * r1 or x1 < 0 + 2 * r1:  # Смена направления после удара о границу
         rect_change_x1 = rect_change_x1 * -1
 
-    # Движение шарика 2
+    # Движение мишени 2
     x2 += rect_change_x2
     y2 += rect_change_y2
-    circle(screen, color2, (x2, y2), r2)
-    if y2 > 900 - r2 or y2 < 0 + r2:  # Смена направления после удара о границу
-        rect_change_y2 += randint(10, 50)
+    polygon(screen, color2, [(x2 - r2, y2 - r2), (x2 - r2, y2 + r2), (x2 + r2, y2 + r2), (x2 + r2, y2 - r2)])
+    if y2 > 900 - 2 * r2 or y2 < 0 + 2 * r2:  # Смена направления после удара о границу
         rect_change_y2 = rect_change_y2 * -1
-    if x2 > 1200 - r2 or x2 < 0 + r2:  # Смена направления после удара о границу
-        rect_change_x2 += randint(10, 50)
+
+    if x2 > 1200 - 2 * r2 or x2 < 0 + 2 * r2:  # Смена направления после удара о границу
         rect_change_x2 = rect_change_x2 * -1
 
     for event in pygame.event.get():
