@@ -28,17 +28,20 @@ def new_ball():
 
 
 def click(event):
-    print(x, y, r)
-    print(event.pos[0], event.pos[1])
+    """
+    По клику мыши вычисляется (по теореме Пифагора) попали ли мы в шарик
+    :param event:
+    :return:
+    """
     if (event.pos[1] - y) ** 2 + (event.pos[0] - x) ** 2 <= r ** 2:
-        print("+")
-    else:
-        print("-")
+        return True
 
 
 pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
+
+points = 0
 
 while not finished:
     clock.tick(FPS)
@@ -46,12 +49,12 @@ while not finished:
         if event.type == pygame.QUIT:
             finished = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            click(event)
-            print('Click!')
+            if click(event):  # Посчет очков
+                points = points + 1
 
     new_ball()
-
     pygame.display.update()
     screen.fill(BLACK)
 
+print("Вы набрали " + str(points) + " очков")  # Вывод количества очков
 pygame.quit()
