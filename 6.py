@@ -27,7 +27,7 @@ def new_ball1():
 
 
 def new_ball2():
-    '''рисует новый шарик '''
+    '''рисует новую мишень '''
     global x2, y2, r2, color2
     r2 = randint(30, 50)
     x2 = randint(0 + r2, 700)
@@ -45,6 +45,23 @@ def click(event):
         return True
     if (event.pos[1] - y2) ** 2 + (event.pos[0] - x2) ** 2 <= r2 ** 2:
         return True
+
+
+def text(str):
+    """
+    Функция выводит количество набраных очков на экране во время игры
+    :param str:
+    :return:
+    """
+    font = pygame.font.Font(None, 50)
+    text = font.render(str, False, (100, 255, 100))
+    text_x = 800
+    text_y = 20
+    text_w = 150
+    text_h = 30
+    screen.blit(text, (text_x, text_y))
+    pygame.draw.rect(screen, (0, 255, 0), (text_x - 10, text_y - 10,
+                                           text_w + 20, text_h + 20), 1)
 
 
 pygame.display.update()
@@ -88,9 +105,12 @@ while not finished:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if click(event):  # Посчет очков
                 points = points + 1
-
+    text("Очки " + str(points))
     pygame.display.update()
     screen.fill(BLACK)
 
-print("Вы набрали " + str(points) + " очков")  # Вывод количества очков
 pygame.quit()
+
+name = input("Ваше имя?  ")
+f = open('table.txt', 'a', encoding='utf8')
+f.write(name + " набрал " + str(points) + '\n')
