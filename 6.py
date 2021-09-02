@@ -74,12 +74,34 @@ def text(str):
                                            text_w + 20, text_h + 20), 1)
 
 
+def table_point():
+    """
+    Функция сверяет с таблицей (table.txt) наран ли новый максимум очков, если набран,
+    срашивает имя игрока и записывает в конец таблицы имя и points.
+    :return:
+    """
+    fin = open('table.txt', 'r', encoding='utf8')
+    max = 0
+    for line in fin:
+        s = line.split(" ")
+        points_0 = int(s[2])
+        if max < points_0:
+            max = points_0
+
+    if points > max:
+        fout = open("table.txt", "a", encoding='utf8')
+        name = input("Вы стали лучшим игроком!!! Ваше имя?  ")
+        print(name + " набрал(а) " + str(points) + " ", file=fout)
+        fout.close()
+    fin.close()
+
+
 # Музыка и звуки
 pygame.mixer.music.load('data/house_lo.ogg')
 pygame.mixer.music.play(-1)
 
 sound1 = pygame.mixer.Sound('data/boom.wav')
-sound2 = pygame.mixer.Sound('punch.wav')
+sound2 = pygame.mixer.Sound('data/punch.wav')
 
 pygame.display.update()
 clock = pygame.time.Clock()
@@ -130,22 +152,5 @@ while not finished:
     pygame.display.update()
     screen.fill(BLACK)
 
-
 pygame.quit()
-
-fin = open('table.txt', 'r', encoding='utf8')
-max = 0
-
-for line in fin:
-    s = line.split(" ")
-    points_0 = int(s[2])
-    if max < points_0:
-        max = points_0
-
-if points > max:
-    fout = open("table.txt", "a", encoding='utf8')
-    name = input("Вы стали лучшим игроком!!! Ваше имя?  ")
-    print(name + " набрал(а) " + str(points) + " ", file=fout)
-    fout.close()
-
-fin.close()
+table_point()
